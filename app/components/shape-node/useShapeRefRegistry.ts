@@ -3,7 +3,7 @@ import { useEffect, useRef } from "react";
 
 type AllowedShapeTypes = Konva.Rect | Konva.Circle | Konva.Text;
 
-export const useRefRegistry = <T extends AllowedShapeTypes>(isSelected: boolean) => {
+export const useShapeRefRegistry = <T extends AllowedShapeTypes>(isSelected: boolean) => {
   const shapeRef = useRef<T>(null);
   const trRef = useRef<Konva.Transformer>(null);
 

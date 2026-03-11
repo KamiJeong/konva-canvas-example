@@ -1,13 +1,18 @@
 import { useCallback, useState } from "react";
 import { Layer, Stage } from "react-konva";
-import CircleNode from "~/components/shape-node/circle-node";
-import RectNode from "~/components/shape-node/rect-node";
-import TextNode from "~/components/shape-node/text-node";
+import {
+  CircleNode,
+  createCircleShape,
+  createId,
+  createRectShape,
+  createTextShape,
+  RectNode,
+  type ShapeItem,
+  TextNode,
+} from "~/components/shape-node";
 import { useMounted } from "~/hooks/useMounted";
-import type { CircleShape, RectShape, ShapeItem, TextShape } from "~/types/canvas-shape";
-import { createId } from "~/utils/id";
 
-export default function AddAndManageElement() {
+export default function RefactorTheShapeModel() {
   const mounted = useMounted();
   const [shapes, setShapes] = useState<ShapeItem[]>([]);
   const [selectedId, setSelectedId] = useState<string | null>(null);
@@ -25,50 +30,28 @@ export default function AddAndManageElement() {
     );
   };
 
-  const addRect = () => {
-    const newRect: RectShape = {
-      id: createId(),
-      type: "rect",
-      x: 120,
-      y: 120,
-      width: 160,
-      height: 100,
-      fill: "#3b82f6",
-      rotation: 0,
-    };
+  const patchShape = (id: string, updates: Partial<ShapeItem>) => {
+    setShapes((prevShapes) =>
+      prevShapes.map((shape) =>
+        shape.id === id ? ({ ...shape, ...updates } as ShapeItem) : shape,
+      ),
+    );
+  };
 
+  const addRect = () => {
+    const newRect = createRectShape();
     setShapes((prevShapes) => [...prevShapes, newRect]);
     setSelectedId(newRect.id);
   };
 
   const addCircle = () => {
-    const newCircle: CircleShape = {
-      id: createId(),
-      type: "circle",
-      x: 220,
-      y: 180,
-      radius: 50,
-      fill: "#10b981",
-      rotation: 0,
-    };
-
+    const newCircle = createCircleShape();
     setShapes((prev) => [...prev, newCircle]);
     setSelectedId(newCircle.id);
   };
 
   const addText = () => {
-    const newText: TextShape = {
-      id: createId(),
-      type: "text",
-      x: 160,
-      y: 240,
-      width: 220,
-      text: "New Text",
-      fontSize: 28,
-      fill: "#111827",
-      rotation: 0,
-    };
-
+    const newText = createTextShape();
     setShapes((prev) => [...prev, newText]);
     setSelectedId(newText.id);
   };
@@ -84,7 +67,7 @@ export default function AddAndManageElement() {
     const target = shapes.find((shape) => shape.id === selectedId);
     if (!target) return;
 
-    const newShape = {
+    const newShape: ShapeItem = {
       ...target,
       id: createId(),
       x: target.x + 20,

@@ -1,8 +1,7 @@
 import type Konva from "konva";
 import { Circle, Transformer } from "react-konva";
-import { useShapeRefRegistry } from "~/components/shape-node/useShapeRefRegistry";
-import type { CircleShape } from "~/types/canvas-shape";
-import type { ShapeBaseProps } from "./types";
+import type { CircleShape, ShapeBaseProps } from "./types";
+import { useShapeRefRegistry } from "./useShapeRefRegistry";
 
 type CircleNodeProps = ShapeBaseProps & {
   shape: CircleShape;

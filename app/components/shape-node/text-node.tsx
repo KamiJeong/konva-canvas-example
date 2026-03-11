@@ -1,8 +1,7 @@
 import type Konva from "konva";
 import { Text, Transformer } from "react-konva";
-import { useShapeRefRegistry } from "~/components/shape-node/useShapeRefRegistry";
-import type { TextShape } from "~/types/canvas-shape";
-import type { ShapeBaseProps } from "./types";
+import type { ShapeBaseProps, TextShape } from "./types";
+import { useShapeRefRegistry } from "./useShapeRefRegistry";
 
 type TextNodeProps = ShapeBaseProps & {
   shape: TextShape;

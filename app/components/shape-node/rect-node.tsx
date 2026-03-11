@@ -1,8 +1,6 @@
 import type Konva from "konva";
 import { Rect, Transformer } from "react-konva";
-import type { RectShape } from "~/types/canvas-shape";
-import type { ShapeBaseProps } from "./types";
-
+import type { RectShape, ShapeBaseProps } from "./types";
 import { useShapeRefRegistry } from "./useShapeRefRegistry";
 
 type RectNodeProps = ShapeBaseProps & {
