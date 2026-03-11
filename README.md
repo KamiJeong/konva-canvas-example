@@ -1,87 +1,177 @@
-# Welcome to React Router!
+# Konva Canvas Example
 
-A modern, production-ready template for building full-stack React applications using React Router.
+This project is a step-by-step `Konva` + `react-konva` example built with React Router and TypeScript.
 
-[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/remix-run/react-router-templates/tree/main/default)
+Right now, the implemented part of the tutorial goes up to `5. Edit Text And Images`.
+After that, routes `6` to `11` are defined as placeholders for the next stages.
 
-## Features
+It is not a single polished editor yet. It is closer to a learning playground that walks through the main pieces you need to build a canvas editor:
 
-- 🚀 Server-side rendering
-- ⚡️ Hot Module Replacement (HMR)
-- 📦 Asset bundling and optimization
-- 🔄 Data loading and mutations
-- 🔒 TypeScript by default
-- 🎉 TailwindCSS for styling
-- 📖 [React Router docs](https://reactrouter.com/)
+- rendering shapes
+- selecting nodes
+- dragging, resizing, and rotating
+- managing shape state
+- editing text and images
+- building side panels
+- zooming and panning
+- multi-selection
+- save/load/export ideas
+- undo/redo and refactoring
+
+## What You Can Learn
+
+By reading and running this project, you can learn how to:
+
+- use `Stage`, `Layer`, and shape components from `react-konva`
+- keep canvas data in React state
+- connect Konva nodes to `Transformer`
+- update shape data after drag or transform
+- separate shape rendering into reusable components
+- organize a small editor with controls and feature modules
+- think about editor features in incremental steps instead of building everything at once
+
+## Tech Stack
+
+- React 19
+- React Router 7
+- TypeScript
+- Konva
+- react-konva
+- Vite
+- Biome
 
 ## Getting Started
 
-### Installation
+### 1. Install dependencies
 
-Install the dependencies:
-
-```bash
-npm install
-```
-
-### Development
-
-Start the development server with HMR:
+This project uses `bun`.
 
 ```bash
-npm run dev
+bun install
 ```
 
-Your application will be available at `http://localhost:5173`.
-
-## Building for Production
-
-Create a production build:
+### 2. Start the development server
 
 ```bash
-npm run build
+bun run dev
 ```
 
-## Deployment
+Open:
 
-### Docker Deployment
+```text
+http://localhost:5173
+```
 
-To build and run using Docker:
+### 3. Useful commands
 
 ```bash
-docker build -t my-app .
-
-# Run the container
-docker run -p 3000:3000 my-app
+bun run dev
+bun run build
+bun run start
+bun run typecheck
+bun run lint
+bun run format
+bun run check
 ```
 
-The containerized application can be deployed to any platform that supports Docker, including:
+## Current Progress
 
-- AWS ECS
-- Google Cloud Run
-- Azure Container Apps
-- Digital Ocean App Platform
-- Fly.io
-- Railway
+Implemented now:
 
-### DIY Deployment
+- `1. Render And Select Shapes`
+- `2. Move Resize And Rotate`
+- `3. Add And Manage Element`
+- `4. Refactor The Shape Model`
+- `5. Edit Text And Images`
 
-If you're familiar with deploying Node applications, the built-in app server is production-ready.
+Planned next, but not implemented yet:
 
-Make sure to deploy the output of `npm run build`
+- `6. Build Editor Side Panels`
+- `7. Layer Order Zoom And Pan`
+- `8. Multi Selection Basics`
+- `9. Save Load And Export`
+- `10. Undo Redo And Refactoring`
+- `11. Final Demo And Next Steps`
 
+## Learning Route Map
+
+The Konva examples live under `/konva/*`.
+
+1. `/konva/1-render-and-select-shapes`
+   Render basic shapes and handle selection.
+2. `/konva/2-move-resize-and-rotate`
+   Add dragging and `Transformer` behavior.
+3. `/konva/3-add-and-manage-element`
+   Add new elements and manage them in state.
+4. `/konva/4-refactor-the-shape-model`
+   Move toward a cleaner shared shape model.
+5. `/konva/5-edit-text-and-images`
+   Handle editable text and image-related cases.
+6. `/konva/6-build-editor-side-panels`
+   Placeholder route for the next editor UI step.
+7. `/konva/7-layer-order-zoom-and-pan`
+   Placeholder route for canvas navigation and ordering.
+8. `/konva/8-multi-selection-basics`
+   Placeholder route for multi-selection work.
+9. `/konva/9-save-load-and-export`
+   Placeholder route for persistence and export.
+10. `/konva/10-undo-redo-and-refactoring`
+    Placeholder route for history and cleanup work.
+11. `/konva/11-final-demo-and-next-steps`
+    Placeholder route for the final wrap-up.
+
+## Project Structure
+
+```text
+app/
+  components/
+    action-button/
+    property-control/
+    shape-node/
+  features/
+    RenderAndSelectShapes.tsx
+    MoveResizeAndRotate.tsx
+    AddAndManageElement.tsx
+    RefactorTheShapeModel.tsx
+    EditTextAndImages.tsx
+  routes/
+    home.tsx
+    konva/
+  hooks/
+  types/
+  utils/
 ```
-├── package.json
-├── package-lock.json (or pnpm-lock.yaml, or bun.lockb)
-├── build/
-│   ├── client/    # Static assets
-│   └── server/    # Server-side code
-```
 
-## Styling
+## Where To Read First
 
-This template comes with [Tailwind CSS](https://tailwindcss.com/) already configured for a simple default starting experience. You can use whatever CSS framework you prefer.
+If you want the fastest path through the codebase, start here:
 
----
+- `app/routes.ts`
+  shows the ordered lesson routes
+- `app/routes/konva/1-render-and-select-shapes.tsx`
+  the first example page
+- `app/features/RenderAndSelectShapes.tsx`
+  basic shape rendering and selection logic
+- `app/features/MoveResizeAndRotate.tsx`
+  dragging and transform handling
+- `app/features/EditTextAndImages.tsx`
+  the current most advanced implemented example
+- `app/components/shape-node/*`
+  reusable shape rendering pieces
 
-Built with ❤️ using React Router.
+## Notes
+
+- The home page still looks like the default starter in places, so the real learning content is under the `/konva/*` routes.
+- Routes `6` to `11` currently render simple placeholder pages, so the practical learning content currently ends at `5. Edit Text And Images`.
+- This repo is best used as a reference project for learning and experimentation.
+- Some parts are intentionally incremental and may still be rough while the editor ideas are being explored.
+
+## Suggested Next Improvements
+
+If you continue this project, useful next steps would be:
+
+- add a better home page that links to every lesson
+- add image upload examples
+- add keyboard shortcuts for delete, duplicate, and undo/redo
+- add JSON import/export with validation
+- add tests for shape state updates and editor interactions
