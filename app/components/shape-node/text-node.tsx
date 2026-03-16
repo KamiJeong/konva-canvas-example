@@ -2,6 +2,7 @@ import type Konva from "konva";
 import { Text, Transformer } from "react-konva";
 import type { ShapeBaseProps, TextShape } from "./types";
 import { useShapeRefRegistry } from "./useShapeRefRegistry";
+import { round } from "./utils";
 
 type TextNodeProps = ShapeBaseProps & {
   shape: TextShape;
@@ -29,15 +30,15 @@ export default function TextNode({ shape, isSelected, onSelect, onChange }: Text
         onDragEnd={(e) => {
           onChange({
             ...shape,
-            x: e.target.x(),
-            y: e.target.y(),
+            x: round(e.target.x()),
+            y: round(e.target.y()),
           });
         }}
         onTransform={() => {
           const node = shapeRef.current;
           if (!node) return;
 
-          const nextWidth = Math.max(60, node.width() * node.scaleX());
+          const nextWidth = round(Math.max(60, node.width() * node.scaleX()));
 
           node.setAttrs({
             width: nextWidth,
@@ -51,10 +52,10 @@ export default function TextNode({ shape, isSelected, onSelect, onChange }: Text
 
           onChange({
             ...shape,
-            x: node.x(),
-            y: node.y(),
-            width: node.width(),
-            rotation: node.rotation(),
+            x: round(node.x()),
+            y: round(node.y()),
+            width: round(node.width()),
+            rotation: round(node.rotation(), 1),
           });
         }}
       />
