@@ -83,10 +83,10 @@ Implemented now:
 - `3. Add And Manage Element`
 - `4. Refactor The Shape Model`
 - `5. Edit Text And Images`
+- `6. Build Editor Side Panels`
 
 Planned next, but not implemented yet:
 
-- `6. Build Editor Side Panels`
 - `7. Layer Order Zoom And Pan`
 - `8. Multi Selection Basics`
 - `9. Save Load And Export`

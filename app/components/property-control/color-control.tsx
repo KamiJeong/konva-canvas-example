@@ -1,21 +1,24 @@
-import { type ForwardedRef, forwardRef, type InputHTMLAttributes } from "react";
+import { type ForwardedRef, forwardRef, type InputHTMLAttributes, useId } from "react";
 
-type ColorControlProps = InputHTMLAttributes<HTMLInputElement>;
+type ColorControlProps = InputHTMLAttributes<HTMLInputElement> & { label?: string };
 
-function ColorControlBase(
-  { type, ...props }: ColorControlProps,
-  ref: ForwardedRef<HTMLInputElement>,
-) {
-  return (
-    <input
-      ref={ref}
-      type="color"
-      {...props}
-      className="border-1 border-slate-400 p-1 text-black cursor-pointer disabled:cursor-not-allowed disabled:opacity-50 disabled:border-slate-300 disabled:text-slate-300"
-    />
-  );
-}
+const ColorControl = forwardRef<HTMLInputElement, ColorControlProps>(
+  ({ type, label, ...props }: ColorControlProps, ref: ForwardedRef<HTMLInputElement>) => {
+    const id = useId();
 
-const ColorControl = forwardRef(ColorControlBase);
+    return (
+      <label htmlFor={`control-${id}`} className="block">
+        <div className="mb-1 text-xs text-slate-500">{label}</div>
+        <input
+          id={`control-${id}`}
+          ref={ref}
+          type="color"
+          {...props}
+          className="w-[50px] h-[50px] p-1 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:border-blue-500"
+        />
+      </label>
+    );
+  },
+);
 
 export default ColorControl;

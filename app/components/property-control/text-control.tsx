@@ -1,21 +1,24 @@
-import { type ForwardedRef, forwardRef, type InputHTMLAttributes } from "react";
+import { type ForwardedRef, forwardRef, type InputHTMLAttributes, useId } from "react";
 
-type TextControlProps = InputHTMLAttributes<HTMLInputElement>;
+type TextControlProps = InputHTMLAttributes<HTMLInputElement> & { label?: string };
 
-function TextControlBase(
-  { type, ...props }: TextControlProps,
-  ref: ForwardedRef<HTMLInputElement>,
-) {
-  return (
-    <input
-      ref={ref}
-      type="text"
-      {...props}
-      className="border-1 border-slate-400 p-1 text-black cursor-pointer disabled:cursor-not-allowed disabled:opacity-50 disabled:border-slate-300 disabled:text-slate-300"
-    />
-  );
-}
+const TextControl = forwardRef<HTMLInputElement, TextControlProps>(
+  ({ type, label, ...props }: TextControlProps, ref: ForwardedRef<HTMLInputElement>) => {
+    const id = useId();
 
-const TextControl = forwardRef(TextControlBase);
+    return (
+      <label htmlFor={`control-${id}`} className="block">
+        <div className="mb-1 text-xs text-slate-500">{label}</div>
+        <input
+          ref={ref}
+          id={`control-${id}`}
+          type="text"
+          {...props}
+          className="w-full rounded-md border border-slate-300 px-3 py-2 text-sm text-slate-400"
+        />
+      </label>
+    );
+  },
+);
 
 export default TextControl;

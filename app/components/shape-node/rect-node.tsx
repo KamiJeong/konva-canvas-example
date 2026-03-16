@@ -2,6 +2,7 @@ import type Konva from "konva";
 import { Rect, Transformer } from "react-konva";
 import type { RectShape, ShapeBaseProps } from "./types";
 import { useShapeRefRegistry } from "./useShapeRefRegistry";
+import { round } from "./utils";
 
 type RectNodeProps = ShapeBaseProps & {
   shape: RectShape;
@@ -28,8 +29,8 @@ export default function RectNode({ shape, isSelected, onSelect, onChange }: Rect
         onDragEnd={(e) => {
           onChange({
             ...shape,
-            x: e.target.x(),
-            y: e.target.y(),
+            x: round(e.target.x()),
+            y: round(e.target.y()),
           });
         }}
         onTransformEnd={(e) => {
@@ -43,10 +44,10 @@ export default function RectNode({ shape, isSelected, onSelect, onChange }: Rect
           node.scaleY(1);
           onChange({
             ...shape,
-            x: node.x(),
-            y: node.y(),
-            width: Math.max(5, node.width() * scaleX),
-            height: Math.max(node.height() * scaleY),
+            x: round(node.x()),
+            y: round(node.y()),
+            width: round(Math.max(5, node.width() * scaleX)),
+            height: round(Math.max(node.height() * scaleY)),
           });
         }}
       />

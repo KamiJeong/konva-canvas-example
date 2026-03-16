@@ -1,21 +1,23 @@
-import { type ForwardedRef, forwardRef, type InputHTMLAttributes } from "react";
+import { type ForwardedRef, forwardRef, type InputHTMLAttributes, useId } from "react";
 
-type NumberControlProps = InputHTMLAttributes<HTMLInputElement>;
+type NumberControlProps = InputHTMLAttributes<HTMLInputElement> & { label?: string };
 
-function NumberControlBase(
-  { type, ...props }: NumberControlProps,
-  ref: ForwardedRef<HTMLInputElement>,
-) {
-  return (
-    <input
-      ref={ref}
-      type="number"
-      {...props}
-      className="border-1 border-slate-400 p-1 text-black cursor-pointer disabled:cursor-not-allowed disabled:opacity-50 disabled:border-slate-300 disabled:text-slate-300"
-    />
-  );
-}
-
-const NumberControl = forwardRef(NumberControlBase);
+const NumberControl = forwardRef<HTMLInputElement, NumberControlProps>(
+  ({ type, label, ...props }: NumberControlProps, ref: ForwardedRef<HTMLInputElement>) => {
+    const id = useId();
+    return (
+      <label htmlFor={`control-${id}`} className="block">
+        <div className="mb-1 text-xs text-slate-500">{label}</div>
+        <input
+          ref={ref}
+          id={`control-${id}`}
+          type="number"
+          {...props}
+          className="w-full rounded-md border border-slate-300 px-3 py-2 text-sm text-slate-400"
+        />
+      </label>
+    );
+  },
+);
 
 export default NumberControl;

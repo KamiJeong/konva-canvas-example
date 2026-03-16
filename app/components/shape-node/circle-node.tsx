@@ -2,6 +2,7 @@ import type Konva from "konva";
 import { Circle, Transformer } from "react-konva";
 import type { CircleShape, ShapeBaseProps } from "./types";
 import { useShapeRefRegistry } from "./useShapeRefRegistry";
+import { round } from "./utils";
 
 type CircleNodeProps = ShapeBaseProps & {
   shape: CircleShape;
@@ -27,8 +28,8 @@ export default function CircleNode({ shape, isSelected, onSelect, onChange }: Ci
         onDragEnd={(e) => {
           onChange({
             ...shape,
-            x: e.target.x(),
-            y: e.target.y(),
+            x: round(e.target.x()),
+            y: round(e.target.y()),
           });
         }}
         onTransformEnd={() => {
@@ -37,16 +38,16 @@ export default function CircleNode({ shape, isSelected, onSelect, onChange }: Ci
 
           const scaleX = node.scaleX();
           const scaleY = node.scaleY();
-          const nextRadius = Math.max(10, node.radius() * Math.max(scaleX, scaleY));
+          const nextRadius = round(Math.max(10, node.radius() * Math.max(scaleX, scaleY)));
 
           node.scaleX(1);
           node.scaleY(1);
 
           onChange({
             ...shape,
-            x: node.x(),
-            y: node.y(),
-            rotation: node.rotation(),
+            x: round(node.x()),
+            y: round(node.y()),
+            rotation: round(node.rotation(), 1),
             radius: nextRadius,
           });
         }}

@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { Image, Transformer } from "react-konva";
 import type { ImageShape, ShapeBaseProps } from "./types";
 import { useShapeRefRegistry } from "./useShapeRefRegistry";
+import { round } from "./utils";
 
 type ImageNodeProps = ShapeBaseProps & {
   shape: ImageShape;
@@ -37,8 +38,8 @@ export default function ImageNode({ shape, isSelected, onSelect, onChange }: Ima
         onDragEnd={(e) => {
           onChange({
             ...shape,
-            x: e.target.x(),
-            y: e.target.y(),
+            x: round(e.target.x()),
+            y: round(e.target.y()),
           });
         }}
         onTransformEnd={() => {
@@ -53,11 +54,11 @@ export default function ImageNode({ shape, isSelected, onSelect, onChange }: Ima
 
           onChange({
             ...shape,
-            x: node.x(),
-            y: node.y(),
-            rotation: node.rotation(),
-            width: Math.max(40, node.width() * scaleX),
-            height: Math.max(40, node.height() * scaleY),
+            x: round(node.x()),
+            y: round(node.y()),
+            rotation: round(node.rotation(), 1),
+            width: round(Math.max(40, node.width() * scaleX)),
+            height: round(Math.max(40, node.height() * scaleY)),
           });
         }}
       />
