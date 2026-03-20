@@ -7,7 +7,7 @@ export function Welcome() {
         <header className="flex flex-col items-center gap-9">
           Use Konva for canvas rendering.
         </header>
-        <div className="max-w-[700px] w-full space-y-6 px-4">
+        <div className="max-w-175 w-full space-y-6 px-4">
           <nav className="rounded-3xl border border-gray-200 p-6 dark:border-gray-700 space-y-4">
             <ul>
               {resources.map(({ link, text }) => (
