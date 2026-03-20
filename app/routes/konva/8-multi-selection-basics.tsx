@@ -1,3 +1,4 @@
+import MultiSelectionBasics from "~/features/multi-selection-basics";
 import type { Route } from "./../+types/home";
 
 export function meta({}: Route.MetaArgs) {
@@ -8,5 +9,5 @@ export function meta({}: Route.MetaArgs) {
 }
 
 export default function Page() {
-  return <div>Page</div>;
+  return <MultiSelectionBasics />;
 }
